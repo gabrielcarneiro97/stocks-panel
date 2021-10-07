@@ -1,14 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import theme from './Theme';
 
+const GlobalStyle = createGlobalStyle`
+  * {
+    font-family: 'Open Sans', sans-serif;
+  }
+`;
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <App />
     </ThemeProvider>
   </React.StrictMode>,
