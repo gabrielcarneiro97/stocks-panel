@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { StockCard } from './components';
+import { Input } from './components';
 
 const AppBackground = styled.div`
   background-color: ${(props) => props.theme.colors.gray000};
@@ -9,7 +9,7 @@ const AppBackground = styled.div`
 export default function App() {
   return (
     <AppBackground>
-      <StockCard hoverble />
+      <Input />
     </AppBackground>
   );
 }
