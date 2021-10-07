@@ -36,7 +36,6 @@ const Logo = styled.div<{ src? : string }>`
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        /* background-size: 45px 45px; */
       `
     : css`background-color: ${props.theme.colors.gray002};`)};
   border-radius: 100px;
@@ -94,6 +93,7 @@ type Props = {
   ticker?: string;
   companyName?: string;
   logoSrc?: string;
+  value?: string;
 }
 
 export default function StockCard(props : Props) {
@@ -104,6 +104,7 @@ export default function StockCard(props : Props) {
     ticker,
     companyName,
     logoSrc,
+    value,
   } = props;
 
   return (
@@ -122,7 +123,7 @@ export default function StockCard(props : Props) {
         </CompanyInfo>
         <PriceContainer>
           <PriceValue positiveVariation={variation === 'positive'}>
-            Value
+            { value || 'Value' }
           </PriceValue>
           <PriceIcon>
             {variation === 'positive' ? <img src={pos} alt="" /> : <img src={neg} alt="" />}
@@ -140,4 +141,5 @@ StockCard.defaultProps = {
   ticker: undefined,
   companyName: undefined,
   logoSrc: undefined,
+  value: undefined,
 };

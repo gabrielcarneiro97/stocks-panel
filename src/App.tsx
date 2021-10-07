@@ -6,12 +6,10 @@ const AppBackground = styled.div`
   background-color: ${(props) => props.theme.colors.gray000};
 `;
 
-function App() {
+export default function App() {
   return (
     <AppBackground>
       <StockCard hoverble />
     </AppBackground>
   );
 }
-
-export default App;
