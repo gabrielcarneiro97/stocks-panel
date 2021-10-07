@@ -1,26 +1,47 @@
-import styled from 'styled-components';
-
-import logo from './ttwr.png';
+import styled, { css } from 'styled-components';
 
 import pos from './assets/pos.png';
 import neg from './assets/neg.png';
 
-const Container = styled.div`
+const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
   display: flex;
   background-color: ${(props) => props.theme.colors.white};
-  box-shadow: 0px 8px 20px -2px rgba(43, 37, 63, 0.1);
+  box-shadow: ${(props) => props.shadow && '0px 8px 20px -2px rgba(43, 37, 63, 0.1)'};
   border-radius: 8px;
   padding: 12px 16px;
   max-width: 320px;
   min-height: 69px;
+  cursor: pointer;
+
+  ${(props) => props.hoverble && css`
+    box-shadow: none;
+    transition-duration: .2s;
+    &:hover {
+      box-shadow: 0px 8px 20px -2px rgba(43, 37, 63, 0.1);
+    }
+  `}
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 45px;
-  min-width: 45px;
+
+`;
+
+const Logo = styled.div<{ src? : string }>`
+  ${(props) => (props.src
+    ? css`
+        background-image: url(${props.src});
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        /* background-size: 45px 45px; */
+      `
+    : css`background-color: ${props.theme.colors.gray002};`)};
+  border-radius: 100px;
+  height: 45px;
+  width: 45px;
 `;
 
 const CardInfo = styled.div`
@@ -68,23 +89,35 @@ const PriceIcon = styled.div`
 
 type Props = {
   variation? : string;
+  hoverble?: boolean;
+  shadow?: boolean;
+  ticker?: string;
+  companyName?: string;
+  logoSrc?: string;
 }
 
 export default function StockCard(props : Props) {
-  const { variation } = props;
+  const {
+    variation,
+    shadow,
+    hoverble,
+    ticker,
+    companyName,
+    logoSrc,
+  } = props;
 
   return (
-    <Container>
+    <Container hoverble={hoverble ?? false} shadow={shadow ?? true}>
       <LogoContainer>
-        <img src={logo} alt="" />
+        <Logo src={logoSrc} />
       </LogoContainer>
       <CardInfo>
         <CompanyInfo>
           <CompanyTicker>
-            TTWR
+            { ticker || 'TCKR' }
           </CompanyTicker>
           <CompanyName>
-            Twitter
+            { companyName || 'Company Name' }
           </CompanyName>
         </CompanyInfo>
         <PriceContainer>
@@ -102,4 +135,9 @@ export default function StockCard(props : Props) {
 
 StockCard.defaultProps = {
   variation: 'positive',
+  hoverble: false,
+  shadow: true,
+  ticker: undefined,
+  companyName: undefined,
+  logoSrc: undefined,
 };

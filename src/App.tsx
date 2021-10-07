@@ -9,7 +9,7 @@ const AppBackground = styled.div`
 function App() {
   return (
     <AppBackground>
-      <StockCard variation="positive" />
+      <StockCard hoverble />
     </AppBackground>
   );
 }
