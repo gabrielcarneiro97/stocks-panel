@@ -1,9 +1,9 @@
 import { FiStar } from 'react-icons/fi';
 import {
-  CartesianGrid, Tooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
+  CartesianGrid, Tooltip as RechartsTooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
 } from 'recharts';
 import styled from 'styled-components';
-import { Button, Company } from '../../..';
+import { Button, Company, Tooltip } from '../../..';
 import theme from '../../../../Theme';
 
 const Container = styled.div`
@@ -46,7 +46,10 @@ export default function Chart() {
   return (
     <Container>
       <Header>
-        <Button variant="white"><FiStar size={24} /></Button>
+        <Tooltip content="Adicionar aos favoritos">
+          <Button variant="white"><FiStar size={24} /></Button>
+        </Tooltip>
+
         <Company />
       </Header>
 
@@ -66,7 +69,7 @@ export default function Chart() {
           <XAxis dataKey="Data" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip content={<CustomTooltip />} />
+          <RechartsTooltip content={<CustomTooltip />} />
           <Area
             type="monotone"
             dataKey="Preço"
