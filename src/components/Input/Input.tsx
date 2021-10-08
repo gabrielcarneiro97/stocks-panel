@@ -1,10 +1,14 @@
-import { forwardRef, useState, ChangeEventHandler } from 'react';
+import {
+  forwardRef, useState, ChangeEventHandler, ReactNode,
+} from 'react';
 import styled from 'styled-components';
 
 const InnerInput = styled.input`
   background: none;
   border: none;
   width: 100%;
+  margin-right: 5px;
+  margin-left: 5px;
   &:focus-visible {
     outline: none;
   }
@@ -25,10 +29,13 @@ type Props = {
   value?: string | number | readonly string[];
   onChange?: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
+  addonAfter?: ReactNode;
 }
 
 const Input = forwardRef<HTMLInputElement, Props>((props : Props, ref) => {
-  const { value, onChange, placeholder } = props;
+  const {
+    value, onChange, placeholder, addonAfter,
+  } = props;
 
   const [focus, setFocus] = useState(false);
 
@@ -42,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, Props>((props : Props, ref) => {
         value={value}
         onChange={onChange}
       />
+      {addonAfter}
     </Wrapper>
   );
 });
@@ -50,6 +58,7 @@ Input.defaultProps = {
   value: undefined,
   onChange: undefined,
   placeholder: undefined,
+  addonAfter: undefined,
 };
 
 export default Input;

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-import { SideMenu } from './components';
+import { MainContent, SideMenu } from './components';
 
 const AppBackground = styled.div`
+  display: flex;
   background-color: ${(props) => props.theme.colors.gray000};
 `;
 
@@ -10,6 +11,7 @@ export default function App() {
   return (
     <AppBackground>
       <SideMenu />
+      <MainContent />
     </AppBackground>
   );
 }
