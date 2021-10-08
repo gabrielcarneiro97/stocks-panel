@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-type ButtonVariants = 'primary' | 'secondary' | 'success' | 'danger';
+type ButtonVariants = 'primary' | 'secondary' | 'success' | 'danger' | 'white';
 
 const Button = styled.button<{ variant? : ButtonVariants }>`
   display: flex;
