@@ -1,7 +1,8 @@
 import { FiGrid } from 'react-icons/fi';
 import styled from 'styled-components';
 import theme from '../../Theme';
-import SearchBar from './components/SearchBar';
+import Chart from './components/Chart/Chart';
+import SearchBar from './components/SearchBar/SearchBar';
 
 const Container = styled.div`
   display: flex;
@@ -20,6 +21,7 @@ const TitleContainer = styled.div`
 
 const SearchContainer = styled.div`
   width: 20vw;
+  margin-bottom: 30px;
 `;
 
 export default function MainContent() {
@@ -37,6 +39,7 @@ export default function MainContent() {
       <SearchContainer>
         <SearchBar />
       </SearchContainer>
+      <Chart />
     </Container>
   );
 }

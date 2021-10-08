@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { Input, Button } from '../..';
+import { Input, Button } from '../../..';
 
 export default function SearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
