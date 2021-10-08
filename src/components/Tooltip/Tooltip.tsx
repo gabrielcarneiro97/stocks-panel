@@ -49,7 +49,7 @@ const TooltipContent = styled.div<{ chart?: boolean }>`
       `
   )}
 
-  z-index: 999;
+  z-index: 100;
 
   &:after {
     content: "";
@@ -59,9 +59,9 @@ const TooltipContent = styled.div<{ chart?: boolean }>`
     border-width: 8px;
     border-style: solid;
     border-color: transparent ${(props) => props.theme.colors.primary} transparent transparent;
-    top: 98%;
+    top: 95%;
     transform: rotate(270deg);
-    z-index: 999;
+    z-index: 100;
   }
 `;
 
