@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import { FiSearch } from 'react-icons/fi';
-import { Button } from './components';
+import { SideMenu } from './components';
 
 const AppBackground = styled.div`
   background-color: ${(props) => props.theme.colors.gray000};
@@ -10,7 +9,7 @@ const AppBackground = styled.div`
 export default function App() {
   return (
     <AppBackground>
-      <Button><FiSearch size={18} /></Button>
+      <SideMenu />
     </AppBackground>
   );
 }
