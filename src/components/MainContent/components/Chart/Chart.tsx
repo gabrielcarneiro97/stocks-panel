@@ -21,16 +21,14 @@ const Header = styled.div`
   display: flex;
 `;
 
-const data = [{ Data: 'a', Preço: 12 }, { Data: 'b', Preço: 10 }, { Data: 'b', Preço: 11 }, { Data: 'b', Preço: 21 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }];
+const data = [{ Data: '', Preço: null }, { Data: 'a', Preço: 12 }, { Data: 'b', Preço: 10 }, { Data: 'b', Preço: 11 }, { Data: 'b', Preço: 21 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: '', Preço: null }];
 
 const CustomTooltip = (
   { active, payload } : { active? : boolean, payload? : any },
 ) => {
   if (active && payload && payload.length) {
     return (
-      <div>
-        <p>{`$${payload[0].value}`}</p>
-      </div>
+      <Tooltip chart content={`$${payload[0].value}`} />
     );
   }
 
@@ -46,7 +44,7 @@ export default function Chart() {
   return (
     <Container>
       <Header>
-        <Tooltip content="Adicionar aos favoritos">
+        <Tooltip content="Favoritar">
           <Button variant="white"><FiStar size={24} /></Button>
         </Tooltip>
 
