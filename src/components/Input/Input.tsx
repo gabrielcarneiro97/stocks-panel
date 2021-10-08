@@ -18,6 +18,7 @@ const Wrapper = styled.div<{ focus: boolean }>`
   border-radius: 8px;
   padding: 3px;
   padding-left: 5px;
+  height: 30px;
 `;
 
 type Props = {

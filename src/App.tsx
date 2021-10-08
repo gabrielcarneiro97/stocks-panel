@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { Input } from './components';
+import { FiSearch } from 'react-icons/fi';
+import { Button } from './components';
 
 const AppBackground = styled.div`
   background-color: ${(props) => props.theme.colors.gray000};
@@ -9,7 +10,7 @@ const AppBackground = styled.div`
 export default function App() {
   return (
     <AppBackground>
-      <Input />
+      <Button><FiSearch size={18} /></Button>
     </AppBackground>
   );
 }
