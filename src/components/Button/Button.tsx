@@ -6,7 +6,7 @@ const Button = styled.button<{ variant? : ButtonVariants }>`
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => (props.variant === 'white' ? props.theme.colors.primary : props.theme.colors.white)};
   background-color: ${(props) => props.theme.colors[props.variant ?? 'primary']};
   border: none;
   border-radius: 8px;

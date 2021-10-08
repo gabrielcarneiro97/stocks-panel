@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import pos from './assets/pos.png';
 import neg from './assets/neg.png';
+import { Company } from '..';
 
 const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
   display: flex;
@@ -50,34 +51,14 @@ const CardInfo = styled.div`
   margin-left: 12px;
 `;
 
-const CompanyInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const CompanyTicker = styled.div`
-  color: ${(props) => props.theme.colors.gray003};
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 28px;
-`;
-
-const CompanyName = styled.div`
-  color: ${(props) => props.theme.colors.gray002};
-
-  font-size: 14px;
-  line-height: 20px;
-`;
-
 const PriceContainer = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const PriceValue = styled.div<{ positiveVariation: boolean }>`
+const PriceValue = styled.div<{ variation: string }>`
   font-weight: bold;
-  color: ${(props) => (props.positiveVariation ? props.theme.colors.success : props.theme.colors.danger)};
+  color: ${(props) => (props.variation === 'positive' ? props.theme.colors.success : props.theme.colors.danger)};
   margin-right: 2px;
 `;
 
@@ -113,16 +94,9 @@ export default function StockCard(props : Props) {
         <Logo src={logoSrc} />
       </LogoContainer>
       <CardInfo>
-        <CompanyInfo>
-          <CompanyTicker>
-            { ticker || 'TCKR' }
-          </CompanyTicker>
-          <CompanyName>
-            { companyName || 'Company Name' }
-          </CompanyName>
-        </CompanyInfo>
+        <Company name={companyName} ticker={ticker} />
         <PriceContainer>
-          <PriceValue positiveVariation={variation === 'positive'}>
+          <PriceValue variation={variation ?? 'positive'}>
             { value || 'Value' }
           </PriceValue>
           <PriceIcon>
