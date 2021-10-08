@@ -34,6 +34,7 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-left: -5.5px;
 `;
 
 type Props = {

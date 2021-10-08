@@ -18,7 +18,8 @@ const Container = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-top: 16px;
+  margin-bottom: 32px;
 `;
 
 const menuItems = [
