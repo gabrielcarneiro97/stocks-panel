@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
+import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
-import pos from './assets/pos.png';
-import neg from './assets/neg.png';
 import { Company } from '..';
+import theme from '../../Theme';
 
 const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
   display: flex;
@@ -100,7 +100,19 @@ export default function StockCard(props : Props) {
             { value || 'Value' }
           </PriceValue>
           <PriceIcon>
-            {variation === 'positive' ? <img src={pos} alt="" /> : <img src={neg} alt="" />}
+            {variation === 'positive'
+              ? (
+                <FiTrendingUp
+                  color={theme.colors.success}
+                  style={{ marginRight: 3 }}
+                />
+              )
+              : (
+                <FiTrendingDown
+                  color={theme.colors.danger}
+                  style={{ marginRight: 3 }}
+                />
+              )}
           </PriceIcon>
         </PriceContainer>
       </CardInfo>

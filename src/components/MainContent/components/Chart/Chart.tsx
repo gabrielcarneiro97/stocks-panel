@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiStar } from 'react-icons/fi';
+import { FiStar, FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 import {
   CartesianGrid, Tooltip as RechartsTooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
 } from 'recharts';
@@ -7,8 +7,6 @@ import styled from 'styled-components';
 import { Button, Company, Tooltip } from '../../..';
 import theme from '../../../../Theme';
 
-import pos from './assets/pos.png';
-import neg from './assets/neg.png';
 import { ChartTooltip } from './components';
 
 const Container = styled.div`
@@ -72,9 +70,18 @@ export default function Chart() {
         <PriceContainer>
           <Price>
             {variation === 'positive'
-              ? <img src={pos} alt="" />
-              : <img src={neg} alt="" />}
-            {' '}
+              ? (
+                <FiTrendingUp
+                  color={theme.colors.success}
+                  style={{ marginRight: 3 }}
+                />
+              )
+              : (
+                <FiTrendingDown
+                  color={theme.colors.danger}
+                  style={{ marginRight: 3 }}
+                />
+              )}
             $200
           </Price>
           <Variation variation={variation}>
