@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FiStar } from 'react-icons/fi';
 import {
   CartesianGrid, Tooltip as RechartsTooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
@@ -5,6 +6,9 @@ import {
 import styled from 'styled-components';
 import { Button, Company, Tooltip } from '../../..';
 import theme from '../../../../Theme';
+
+import pos from './assets/pos.png';
+import neg from './assets/neg.png';
 
 const Container = styled.div`
   display: flex;
@@ -19,6 +23,35 @@ const Container = styled.div`
 
 const Header = styled.div`
   display: flex;
+  justify-content: space-between;
+`;
+
+const CompanyContainer = styled.div`
+  display: flex;
+`;
+
+const PriceContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-right: 20px;
+`;
+
+const Price = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+
+  img {
+    margin-right: 3px;
+  }
+`;
+
+const Variation = styled.div<{ variation : string }>`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: ${(props) => (props.variation === 'positive' ? props.theme.colors.success : props.theme.colors.danger)};
 `;
 
 const data = [{ Data: '', Preço: null }, { Data: 'a', Preço: 12 }, { Data: 'b', Preço: 10 }, { Data: 'b', Preço: 11 }, { Data: 'b', Preço: 21 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: '', Preço: null }];
@@ -41,14 +74,29 @@ CustomTooltip.defaultProps = {
 };
 
 export default function Chart() {
+  const [variation] = useState('negative');
   return (
     <Container>
       <Header>
-        <Tooltip content="Favoritar">
-          <Button variant="white"><FiStar size={24} /></Button>
-        </Tooltip>
+        <CompanyContainer>
+          <Tooltip content="Favoritar">
+            <Button variant="white"><FiStar size={24} /></Button>
+          </Tooltip>
 
-        <Company />
+          <Company />
+        </CompanyContainer>
+        <PriceContainer>
+          <Price>
+            {variation === 'positive'
+              ? <img src={pos} alt="" />
+              : <img src={neg} alt="" />}
+            {' '}
+            $200
+          </Price>
+          <Variation variation={variation}>
+            $-0.09 (-0.03%)
+          </Variation>
+        </PriceContainer>
       </Header>
 
       <ResponsiveContainer width="100%" height="80%">
