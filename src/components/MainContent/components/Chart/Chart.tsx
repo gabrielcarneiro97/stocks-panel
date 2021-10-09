@@ -18,6 +18,7 @@ const Container = styled.div`
   border-radius: 8px;
   padding: 25px 20px;
   height: 45vh;
+  margin-bottom: 30px;
 `;
 
 const Header = styled.div`

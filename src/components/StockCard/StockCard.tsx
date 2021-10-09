@@ -10,8 +10,8 @@ const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
   box-shadow: ${(props) => props.shadow && '0px 8px 20px -2px rgba(43, 37, 63, 0.1)'};
   border-radius: 8px;
   padding: 12px 16px;
-  max-width: 320px;
-  min-height: 69px;
+  width: 320px;
+  height: 69px;
   cursor: pointer;
 
   ${(props) => props.hoverble && css`

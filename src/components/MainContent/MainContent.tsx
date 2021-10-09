@@ -2,6 +2,7 @@ import { FiGrid } from 'react-icons/fi';
 import styled from 'styled-components';
 import theme from '../../Theme';
 import Chart from './components/Chart/Chart';
+import Recents from './components/Recents/Recents';
 import SearchBar from './components/SearchBar/SearchBar';
 
 const Container = styled.div`
@@ -40,6 +41,7 @@ export default function MainContent() {
         <SearchBar />
       </SearchContainer>
       <Chart />
+      <Recents />
     </Container>
   );
 }
