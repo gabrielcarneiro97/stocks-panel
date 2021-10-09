@@ -9,6 +9,7 @@ import theme from '../../../../Theme';
 
 import pos from './assets/pos.png';
 import neg from './assets/neg.png';
+import { ChartTooltip } from './components';
 
 const Container = styled.div`
   display: flex;
@@ -56,23 +57,6 @@ const Variation = styled.div<{ variation : string }>`
 
 const data = [{ Data: '', Preço: null }, { Data: 'a', Preço: 12 }, { Data: 'b', Preço: 10 }, { Data: 'b', Preço: 11 }, { Data: 'b', Preço: 21 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: '', Preço: null }];
 
-const CustomTooltip = (
-  { active, payload } : { active? : boolean, payload? : any },
-) => {
-  if (active && payload && payload.length) {
-    return (
-      <Tooltip chart content={`$${payload[0].value}`} />
-    );
-  }
-
-  return null;
-};
-
-CustomTooltip.defaultProps = {
-  active: undefined,
-  payload: undefined,
-};
-
 export default function Chart() {
   const [variation] = useState('negative');
   return (
@@ -115,7 +99,7 @@ export default function Chart() {
           <XAxis dataKey="Data" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
-          <RechartsTooltip content={<CustomTooltip />} />
+          <RechartsTooltip content={<ChartTooltip />} />
           <Area
             type="monotone"
             dataKey="Preço"
