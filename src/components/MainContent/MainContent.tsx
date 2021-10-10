@@ -10,6 +10,9 @@ const Container = styled.div`
   flex-direction: column;
   padding: 24px;
   width: 60vw;
+  background-color: ${(props) => props.theme.colors.gray000};
+  border-top-left-radius: 24px;
+  margin: -8px;
 `;
 
 const TitleContainer = styled.div`
