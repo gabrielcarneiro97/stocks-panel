@@ -116,7 +116,7 @@ export default function Recents() {
         }}
         ref={cardsRef}
       >
-        {cards.map((el) => <StockCard key={el.id} />)}
+        {cards.map((el) => <StockCard hoverble key={el.id} />)}
 
       </Cards>
     </Container>
