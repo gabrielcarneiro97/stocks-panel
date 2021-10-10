@@ -1,7 +1,7 @@
 import { forwardRef, MouseEventHandler, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
-type ButtonVariants = 'primary' | 'secondary' | 'success' | 'danger' | 'white';
+type ButtonVariants = 'primary' | 'secondary' | 'success' | 'danger' | 'white' | 'ghost';
 
 type StyledProps = { variant? : ButtonVariants, disabled? : boolean };
 
@@ -20,8 +20,8 @@ const StyledButton = styled.button<StyledProps>`
     `
     : css`
       cursor: pointer;
-      color: ${(props.variant === 'white' ? props.theme.colors.primary : props.theme.colors.white)};
-      background-color: ${props.theme.colors[props.variant ?? 'primary']};
+      color: ${(props.variant === 'white' || props.variant === 'ghost' ? props.theme.colors.primary : props.theme.colors.white)};
+      background-color: ${props.variant === 'ghost' ? 'transparent' : props.theme.colors[props.variant ?? 'primary']};
 
       &:hover {
         opacity: .7;
