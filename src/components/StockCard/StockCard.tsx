@@ -1,7 +1,7 @@
 import styled, { css, useTheme } from 'styled-components';
 import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
-import { forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import { Company } from '..';
 
 const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
@@ -21,6 +21,14 @@ const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
       box-shadow: 0px 8px 20px -2px rgba(43, 37, 63, 0.1);
     }
   `}
+`;
+
+const LeftAddonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  margin-left: 0;
 `;
 
 const LogoContainer = styled.div`
@@ -75,6 +83,7 @@ type Props = {
   companyName?: string;
   logoSrc?: string;
   value?: string;
+  addon?: ReactNode;
 }
 
 const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
@@ -86,6 +95,7 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
     companyName,
     logoSrc,
     value,
+    addon,
   } = props;
 
   const theme = useTheme();
@@ -96,6 +106,14 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
       shadow={shadow ?? true}
       ref={ref}
     >
+      {
+        addon
+        && (
+          <LeftAddonContainer>
+            {addon}
+          </LeftAddonContainer>
+        )
+      }
       <LogoContainer>
         <Logo src={logoSrc} />
       </LogoContainer>
@@ -134,6 +152,7 @@ StockCard.defaultProps = {
   companyName: undefined,
   logoSrc: undefined,
   value: undefined,
+  addon: undefined,
 };
 
 export default StockCard;

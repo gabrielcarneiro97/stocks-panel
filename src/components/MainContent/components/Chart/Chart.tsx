@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { FiStar, FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
+import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 import {
   CartesianGrid, Tooltip as RechartsTooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import { Button, Company, Tooltip } from '../../..';
+import {
+  AddToFavButton, Company,
+} from '../../..';
 
 import { ChartTooltip } from './components';
 
@@ -63,9 +65,7 @@ export default function Chart() {
     <Container>
       <Header>
         <CompanyContainer>
-          <Tooltip content="Favoritar">
-            <Button variant="white"><FiStar size={24} /></Button>
-          </Tooltip>
+          <AddToFavButton companyId={0} />
 
           <Company />
         </CompanyContainer>

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { FiBarChart2, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
-import { Button, StockCard } from '../../..';
+import { AddToFavButton, Button, StockCard } from '../../..';
 
 const Container = styled.div``;
 
@@ -116,7 +116,9 @@ export default function Recents() {
         }}
         ref={cardsRef}
       >
-        {cards.map((el) => <StockCard hoverble key={el.id} />)}
+        {cards.map(
+          (el) => <StockCard hoverble key={el.id} addon={<AddToFavButton companyId={el.id} />} />,
+        )}
 
       </Cards>
     </Container>
