@@ -7,11 +7,11 @@ import { MenuItem } from './components';
 
 const Container = styled.div`
   display: flex;
+  flex-grow: 2;
   flex-direction: column;
   height: 100vh;
   margin: -8px;
   margin-right: 8px;
-  width: 98px;
   background-color: ${(props) => props.theme.colors.white};
 `;
 

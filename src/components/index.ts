@@ -6,3 +6,4 @@ export { default as MainContent } from './MainContent/MainContent';
 export { default as Company } from './Company/Company';
 export { default as Tooltip } from './Tooltip/Tooltip';
 export { default as AddToFavButton } from './AddToFavButton/AddToFavButton';
+export { default as Favorites } from './Favorites/Favorites';

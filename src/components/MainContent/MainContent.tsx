@@ -6,6 +6,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 
 const Container = styled.div`
   display: flex;
+  flex-grow: 6;
   flex-direction: column;
   padding: 24px;
   width: 60vw;

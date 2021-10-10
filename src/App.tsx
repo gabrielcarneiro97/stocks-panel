@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { MainContent, SideMenu } from './components';
+import { Favorites, MainContent, SideMenu } from './components';
 
 const AppBackground = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ export default function App() {
     <AppBackground>
       <SideMenu />
       <MainContent />
+      <Favorites />
     </AppBackground>
   );
 }
