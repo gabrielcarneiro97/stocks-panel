@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
+import { forwardRef } from 'react';
 import { Company } from '..';
 import theme from '../../Theme';
 
@@ -77,7 +78,7 @@ type Props = {
   value?: string;
 }
 
-export default function StockCard(props : Props) {
+const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
   const {
     variation,
     shadow,
@@ -89,7 +90,11 @@ export default function StockCard(props : Props) {
   } = props;
 
   return (
-    <Container hoverble={hoverble ?? false} shadow={shadow ?? true}>
+    <Container
+      hoverble={hoverble ?? false}
+      shadow={shadow ?? true}
+      ref={ref}
+    >
       <LogoContainer>
         <Logo src={logoSrc} />
       </LogoContainer>
@@ -118,7 +123,7 @@ export default function StockCard(props : Props) {
       </CardInfo>
     </Container>
   );
-}
+});
 
 StockCard.defaultProps = {
   variation: 'positive',
@@ -129,3 +134,5 @@ StockCard.defaultProps = {
   logoSrc: undefined,
   value: undefined,
 };
+
+export default StockCard;

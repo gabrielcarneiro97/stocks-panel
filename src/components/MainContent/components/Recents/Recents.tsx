@@ -34,24 +34,60 @@ const Cards = styled.div`
   }
 `;
 
+// const cards = [{
+//   id: 0,
+// }, {
+//   id: 1,
+// }, {
+//   id: 2,
+// }, {
+//   id: 3,
+// }, {
+//   id: 4,
+// }, {
+//   id: 5,
+// }, {
+//   id: 6,
+// }];
+
+const cardWithMarginWidth = 384;
+
 export default function Recents() {
   return (
     <Container>
       <Header>
-        <FiBarChart2 size={18} color={theme.colors.primary} style={{ marginRight: 3 }} />
-        {' '}
-        Empresas Recentes
+        <div>
+          <FiBarChart2 size={18} color={theme.colors.primary} style={{ marginRight: 3 }} />
+          {' '}
+          Empresas Recentes
+        </div>
+
       </Header>
 
-      <Cards>
+      <Cards onScroll={(e) => {
+        const cardsQnt = e.currentTarget.scrollWidth / cardWithMarginWidth;
+        console.log(
+          cardsQnt - (
+            e.currentTarget.scrollWidth - e.currentTarget.scrollLeft) / cardWithMarginWidth,
+        );
+
+        console.log(
+          e.currentTarget.scrollWidth - e.currentTarget.scrollLeft === e.currentTarget.offsetWidth,
+        );
+
+        // fim do scroll:
+        // e.currentTarget.scrollWidth - e.currentTarget.scrollLeft === e.currentTarget.offsetWidth
+
+        // início do scroll:
+        // e.scrollLeft === 0
+      }}
+      >
         <StockCard />
         <StockCard />
         <StockCard />
         <StockCard />
         <StockCard />
-        <StockCard />
-        <StockCard />
-        <StockCard />
+
       </Cards>
     </Container>
   );
