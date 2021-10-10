@@ -1,10 +1,9 @@
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { FiGrid } from 'react-icons/fi';
 
 import { useState } from 'react';
 import logo from './assets/logo.png';
 import { MenuItem } from './components';
-import theme from '../../Theme';
 
 const Container = styled.div`
   display: flex;
@@ -23,15 +22,16 @@ const LogoContainer = styled.div`
   margin-bottom: 32px;
 `;
 
-const menuItems = [
-  {
-    id: 0,
-    content: <FiGrid color={theme.colors.primary} size={32} />,
-  },
-];
-
 export default function SideMenu() {
+  const theme = useTheme();
   const [active, setActive] = useState(0);
+
+  const menuItems = [
+    {
+      id: 0,
+      content: <FiGrid color={theme.colors.primary} size={32} />,
+    },
+  ];
 
   return (
     <Container>

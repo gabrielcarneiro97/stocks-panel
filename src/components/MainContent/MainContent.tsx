@@ -1,6 +1,5 @@
 import { FiGrid } from 'react-icons/fi';
-import styled from 'styled-components';
-import theme from '../../Theme';
+import styled, { useTheme } from 'styled-components';
 import Chart from './components/Chart/Chart';
 import Recents from './components/Recents/Recents';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -26,6 +25,8 @@ const SearchContainer = styled.div`
 `;
 
 export default function MainContent() {
+  const theme = useTheme();
+
   return (
     <Container>
       <TitleContainer>

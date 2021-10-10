@@ -3,9 +3,8 @@ import { FiStar, FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 import {
   CartesianGrid, Tooltip as RechartsTooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
 } from 'recharts';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Button, Company, Tooltip } from '../../..';
-import theme from '../../../../Theme';
 
 import { ChartTooltip } from './components';
 
@@ -58,6 +57,8 @@ const data = [{ Data: '', Preço: null }, { Data: 'a', Preço: 12 }, { Data: 'b'
 
 export default function Chart() {
   const [variation] = useState('negative');
+  const theme = useTheme();
+
   return (
     <Container>
       <Header>

@@ -1,7 +1,6 @@
 import { FiBarChart2 } from 'react-icons/fi';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { StockCard } from '../../..';
-import theme from '../../../../Theme';
 
 const Container = styled.div``;
 
@@ -53,6 +52,8 @@ const Cards = styled.div`
 const cardWithMarginWidth = 384;
 
 export default function Recents() {
+  const theme = useTheme();
+
   return (
     <Container>
       <Header>

@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
 import { forwardRef } from 'react';
 import { Company } from '..';
-import theme from '../../Theme';
 
 const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
   display: flex;
@@ -88,6 +87,8 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
     logoSrc,
     value,
   } = props;
+
+  const theme = useTheme();
 
   return (
     <Container
