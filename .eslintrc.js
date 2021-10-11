@@ -37,6 +37,7 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'no-param-reassign': 'off',
   },
   settings: {
     'import/resolver': {

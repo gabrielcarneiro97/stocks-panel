@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { Provider as StoreProvider } from 'react-redux';
 
 import theme from 'Theme';
 import App from 'App';
-import reportWebVitals from './reportWebVitals';
+import store from 'store';
+import reportWebVitals from 'reportWebVitals';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -14,10 +16,12 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <App />
-    </ThemeProvider>
+    <StoreProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
