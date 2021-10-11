@@ -1,18 +1,31 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'store';
 
-const initialState : Set<string> = new Set();
+export interface FavoritesState {
+  set: Set<string>;
+}
+
+const initialState : FavoritesState = {
+  set: new Set(),
+};
 
 export const favoritesSlice = createSlice({
   name: 'favorites',
   initialState,
   reducers: {
     add(state, action : PayloadAction<string>) {
-      state.add(action.payload);
+      state.set.add(action.payload);
     },
     remove(state, action : PayloadAction<string>) {
-      if (state.has(action.payload)) state.delete(action.payload);
+      if (state.set.has(action.payload)) state.set.delete(action.payload);
     },
   },
 });
+
+export const favoritesSelectors = {
+  getCompanies(state : RootState) {
+    return Array.from(state.favorites.set).map((symbol) => state.companies[symbol]);
+  },
+};
 
 export default favoritesSlice.reducer;

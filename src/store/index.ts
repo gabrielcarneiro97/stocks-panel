@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import companiesReducer, { companiesSlice } from './slices/companiesSlice';
-import favoritesReducer, { favoritesSlice } from './slices/favoritesSlice';
+import favoritesReducer, { favoritesSelectors, favoritesSlice } from './slices/favoritesSlice';
 import recentsReducer, { recentsSlice } from './slices/recentsSlice';
 
 const store = configureStore({
@@ -17,6 +17,10 @@ export const actions = {
   companies: companiesSlice.actions,
   favorites: favoritesSlice.actions,
   recents: recentsSlice.actions,
+};
+
+export const selectors = {
+  favorites: favoritesSelectors,
 };
 
 export type RootState = ReturnType<typeof store.getState>
