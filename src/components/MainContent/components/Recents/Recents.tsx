@@ -73,7 +73,7 @@ export default function Recents() {
           </Button>
           <Button
             variant="ghost"
-            disabled={scrollStatus === 1}
+            disabled={scrollStatus === 1 || recents.length === 0}
             onClick={() => {
               const to = scrollStatus === 1 ? actualCard : actualCard + 1;
               const position = to * cardWithMarginWidth;
