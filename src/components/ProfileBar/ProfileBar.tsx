@@ -1,6 +1,6 @@
 import { FiChevronDown } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
-import { Button } from '..';
+import { Button } from 'components';
 
 import picture from './assets/profile-pic.png';
 

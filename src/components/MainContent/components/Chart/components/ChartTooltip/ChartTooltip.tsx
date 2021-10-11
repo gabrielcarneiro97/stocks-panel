@@ -1,4 +1,4 @@
-import { Tooltip } from '../../../../..';
+import { Tooltip } from 'components';
 
 type Props = {
   active? : boolean;

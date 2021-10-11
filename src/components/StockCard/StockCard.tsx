@@ -2,7 +2,7 @@ import styled, { css, useTheme } from 'styled-components';
 import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
 import { forwardRef, ReactNode } from 'react';
-import { Company } from '..';
+import { Company } from 'components';
 
 const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
   display: flex;

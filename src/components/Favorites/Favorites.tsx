@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ProfileBar } from '..';
+import { ProfileBar } from 'components';
 import FavoriteStockCard from './FavoriteStockCard/FavoriteStockCard';
 
 const Container = styled.div`
@@ -53,8 +53,6 @@ export default function Favorites() {
         <FavoriteStockCard />
         <FavoriteStockCard />
         <FavoriteStockCard />
-        {/* <FavoriteStockCard /> */}
-        {/* <FavoriteStockCard /> */}
 
       </Cards>
     </Container>

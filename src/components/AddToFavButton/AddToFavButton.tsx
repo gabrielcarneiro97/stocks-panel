@@ -1,5 +1,5 @@
 import { FiStar } from 'react-icons/fi';
-import { Button, Tooltip } from '..';
+import { Button, Tooltip } from 'components';
 
 type Props = {
   companyId : number;

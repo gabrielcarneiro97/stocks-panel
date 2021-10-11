@@ -6,7 +6,7 @@ import {
 import styled, { useTheme } from 'styled-components';
 import {
   AddToFavButton, Company,
-} from '../../..';
+} from 'components';
 
 import { ChartTooltip } from './components';
 

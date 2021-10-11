@@ -1,6 +1,6 @@
 import { FiTrash } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
-import { Button, StockCard } from '../..';
+import { Button, StockCard } from 'components';
 
 const Container = styled.div`
   display: flex;

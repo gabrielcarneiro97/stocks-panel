@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { FiBarChart2, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
-import { AddToFavButton, Button, StockCard } from '../../..';
+import { AddToFavButton, Button, StockCard } from 'components';
 
 const Container = styled.div``;
 
