@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ProfileBar } from 'components';
-import FavoriteStockCard from './FavoriteStockCard/FavoriteStockCard';
+import { FavoriteStockCard } from './components';
 
 const Container = styled.div`
   display: flex;

@@ -1,8 +1,6 @@
 import { FiGrid } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
-import Chart from './components/Chart/Chart';
-import Recents from './components/Recents/Recents';
-import SearchBar from './components/SearchBar/SearchBar';
+import { Chart, Recents, SearchBar } from './components';
 
 const Container = styled.div`
   display: flex;

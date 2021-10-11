@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import App from './App';
+import theme from 'Theme';
+import App from 'App';
 import reportWebVitals from './reportWebVitals';
-import theme from './Theme';
 
 const GlobalStyle = createGlobalStyle`
   * {
