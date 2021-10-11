@@ -6,7 +6,7 @@ const CompanyInfo = styled.div`
   justify-content: center;
 `;
 
-const CompanyTicker = styled.div`
+const CompanySymbol = styled.div`
   color: ${(props) => props.theme.colors.gray003};
   font-weight: bold;
   font-size: 16px;
@@ -21,17 +21,17 @@ const CompanyName = styled.div`
 `;
 
 type Props = {
-  ticker?: string;
+  symbol?: string;
   name?: string;
 }
 
 export default function Company(props : Props) {
-  const { ticker, name } = props;
+  const { symbol, name } = props;
   return (
     <CompanyInfo>
-      <CompanyTicker>
-        { ticker || 'TCKR' }
-      </CompanyTicker>
+      <CompanySymbol>
+        { symbol || 'SYMBOL' }
+      </CompanySymbol>
       <CompanyName>
         { name || 'Company Name' }
       </CompanyName>
@@ -40,6 +40,6 @@ export default function Company(props : Props) {
 }
 
 Company.defaultProps = {
-  ticker: undefined,
+  symbol: undefined,
   name: undefined,
 };

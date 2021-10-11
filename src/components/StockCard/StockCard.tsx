@@ -79,7 +79,7 @@ type Props = {
   variation? : string;
   hoverble?: boolean;
   shadow?: boolean;
-  ticker?: string;
+  symbol?: string;
   companyName?: string;
   logoSrc?: string;
   value?: string;
@@ -91,7 +91,7 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
     variation,
     shadow,
     hoverble,
-    ticker,
+    symbol,
     companyName,
     logoSrc,
     value,
@@ -118,7 +118,7 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
         <Logo src={logoSrc} />
       </LogoContainer>
       <CardInfo>
-        <Company name={companyName} ticker={ticker} />
+        <Company name={companyName} symbol={symbol} />
         <PriceContainer>
           <PriceValue variation={variation ?? 'positive'}>
             { value || 'Value' }
@@ -148,7 +148,7 @@ StockCard.defaultProps = {
   variation: 'positive',
   hoverble: false,
   shadow: true,
-  ticker: undefined,
+  symbol: undefined,
   companyName: undefined,
   logoSrc: undefined,
   value: undefined,
