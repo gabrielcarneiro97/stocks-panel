@@ -18,7 +18,7 @@ const Container = styled.div`
   box-shadow: 0px 4px 12px rgba(222, 222, 231, 0.4);
   border-radius: 8px;
   padding: 25px 20px;
-  height: 45vh;
+  height: 51vh;
   margin-bottom: 30px;
 `;
 

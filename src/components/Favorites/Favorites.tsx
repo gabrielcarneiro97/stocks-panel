@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { ProfileBar } from '..';
 
 const Container = styled.div`
   display: flex;
-  flex-grow: 20;
+  flex-grow: 3;
   flex-direction: column;
   background-color: ${(props) => props.theme.colors.white};
   margin: -8px;
@@ -10,5 +11,10 @@ const Container = styled.div`
 `;
 
 export default function Favorites() {
-  return <Container>Favorites</Container>;
+  return (
+    <Container>
+      <ProfileBar />
+
+    </Container>
+  );
 }

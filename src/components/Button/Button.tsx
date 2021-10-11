@@ -16,7 +16,7 @@ const StyledButton = styled.button<StyledProps>`
   ${(props) => (props.disabled
     ? css`
       color: ${props.theme.colors.gray002};
-      background-color: ${props.theme.colors.gray004};
+      background-color: ${props.variant === 'ghost' ? 'transparent' : props.theme.colors.gray004};
     `
     : css`
       cursor: pointer;
