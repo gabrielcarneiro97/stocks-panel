@@ -3,6 +3,7 @@ import companiesReducer, { companiesSelectors, companiesSlice } from './slices/c
 import favoritesReducer, { favoritesSelectors, favoritesSlice } from './slices/favoritesSlice';
 import recentsReducer, { recentsSelectors, recentsSlice } from './slices/recentsSlice';
 import chartReducer, { chartSelectors, chartSlice } from './slices/chartSlice';
+import { iexApi } from './apis/iexApi';
 
 const store = configureStore({
   reducer: {
@@ -10,7 +11,9 @@ const store = configureStore({
     favorites: favoritesReducer,
     recents: recentsReducer,
     chart: chartReducer,
+    [iexApi.reducerPath]: iexApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(iexApi.middleware),
 });
 
 export default store;

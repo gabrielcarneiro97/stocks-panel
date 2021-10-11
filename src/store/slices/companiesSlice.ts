@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 
-interface Company {
+export interface Company {
   name: string;
   symbol: string;
   lastPrice: number;
@@ -21,7 +21,7 @@ export const companiesSlice = createSlice({
   name: 'companies',
   initialState,
   reducers: {
-    add(state, action : PayloadAction<Company>) {
+    set(state, action : PayloadAction<Company>) {
       const { payload } = action;
       state[payload.symbol] = payload;
     },
