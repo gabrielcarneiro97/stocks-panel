@@ -9,6 +9,9 @@ import {
 
 import { useSelector } from 'react-redux';
 import { selectors } from 'store';
+import { ChartData } from 'store/slices/companiesSlice';
+import { useEffect, useState } from 'react';
+import { iexApi } from 'store/apis/iexApi';
 import { ChartTooltip } from './components';
 
 const Container = styled.div`
@@ -56,10 +59,39 @@ const Variation = styled.div<{ variation : string }>`
   color: ${(props) => (props.variation === 'positive' ? props.theme.colors.success : props.theme.colors.danger)};
 `;
 
-const data = [{ Data: '', Preço: null }, { Data: 'a', Preço: 12 }, { Data: 'b', Preço: 10 }, { Data: 'b', Preço: 11 }, { Data: 'b', Preço: 21 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: '', Preço: null }];
+function chartDataHandler(chartData? : ChartData[]) : ChartData[] | undefined {
+  if (!chartData) return undefined;
+
+  return [{
+    label: '',
+    value: null,
+  },
+  ...chartData,
+  {
+    label: '',
+    value: null,
+  }];
+}
 
 export default function Chart() {
   const company = useSelector(selectors.chart.active);
+  const [getChartData, chartDataResult] = iexApi.useLazyGetChartDataBySymbolQuery();
+
+  const [chartData, setChartData] = useState<ChartData[] | undefined>(undefined);
+
+  useEffect(() => {
+    if (company) {
+      getChartData(company.symbol);
+    }
+  }, [company]);
+
+  useEffect(() => {
+    if (chartDataResult.isLoading || chartDataResult.isFetching) return;
+
+    if (chartDataResult.isSuccess) {
+      setChartData(chartDataHandler(company?.chartData));
+    }
+  }, [chartDataResult]);
 
   const theme = useTheme();
 
@@ -107,7 +139,7 @@ export default function Chart() {
 
             <ResponsiveContainer width="100%" height="80%">
               <AreaChart
-                data={data}
+                data={chartData}
                 margin={{
                   top: 10, right: 30, left: 0, bottom: 0,
                 }}
@@ -118,13 +150,13 @@ export default function Chart() {
                     <stop offset="95%" stopColor={theme.colors.primary} stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <XAxis dataKey="Data" />
+                <XAxis dataKey="label" />
                 <YAxis />
                 <CartesianGrid strokeDasharray="3 3" />
                 <RechartsTooltip content={<ChartTooltip />} />
                 <Area
                   type="monotone"
-                  dataKey="Preço"
+                  dataKey="value"
                   stroke={theme.colors.primary}
                   fillOpacity={1}
                   strokeWidth={2}

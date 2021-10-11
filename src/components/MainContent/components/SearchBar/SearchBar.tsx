@@ -36,6 +36,7 @@ export default function SearchBar() {
   useEffect(() => {
     if (logoResult.isLoading || logoResult.isFetching) return;
     if (logoResult.isSuccess) {
+      dispatch(actions.chart.clean());
       dispatch(actions.chart.set(symbol));
       dispatch(actions.recents.add(symbol));
     }

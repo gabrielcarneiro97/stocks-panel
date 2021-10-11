@@ -11,7 +11,10 @@ export default function AddToFavButton(props : Props) {
   const { symbol } = props;
   const dispatch = useDispatch();
 
-  const handleClick = () => dispatch(actions.favorites.add(symbol));
+  const handleClick = (e : any) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    dispatch(actions.favorites.add(symbol));
+  };
 
   return (
     <Tooltip content="Favoritar">

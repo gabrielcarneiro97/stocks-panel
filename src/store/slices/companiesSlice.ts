@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 
+export interface ChartData {
+  value: number | null;
+  label: string;
+}
+
 export interface Company {
   name: string;
   symbol: string;
@@ -8,7 +13,7 @@ export interface Company {
   changeValue: number;
   changePercent: number;
   logoSrc?: string;
-  chartData?: object;
+  chartData?: ChartData[];
 }
 
 export interface CompaniesState {

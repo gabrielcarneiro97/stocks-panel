@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { actions, RootState } from 'store';
-import { Company } from '../slices/companiesSlice';
+import { ChartData, Company } from '../slices/companiesSlice';
 
 const TOKEN = 'Tpk_69c194138e45487194bbb5d37ecb1896';
 
@@ -42,6 +42,23 @@ export const iexApi = createApi({
           ...stateCompany,
           symbol: symbol.toUpperCase(),
           logoSrc,
+        }));
+      },
+    }),
+    getChartDataBySymbol: builder.query<ChartData[], string>({
+      query: (symbol) => `/stock/${symbol}/chart/dynamic?token=${TOKEN}&chartSimplify=true&chartLast=20`,
+      keepUnusedDataFor: 0,
+      transformResponse: (response : any) => response.data.map(
+        (r : any) => ({ label: r.label, value: r.close }),
+      ),
+      onCacheEntryAdded: async (symbol, { dispatch, getState, cacheDataLoaded }) => {
+        const chartData = (await cacheDataLoaded).data;
+        const state : RootState = getState() as any;
+        const stateCompany = state.companies[symbol.toUpperCase()];
+        dispatch(actions.companies.set({
+          ...stateCompany,
+          symbol: symbol.toUpperCase(),
+          chartData,
         }));
       },
     }),
