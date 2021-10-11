@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import { FiBarChart2, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
 import { AddToFavButton, Button, StockCard } from 'components';
+import { useSelector } from 'react-redux';
+import { selectors } from 'store';
 
 const Container = styled.div``;
 
@@ -40,29 +42,14 @@ const Buttons = styled.div`
   display: flex;
 `;
 
-const cards = [{
-  id: 0,
-}, {
-  id: 1,
-}, {
-  id: 2,
-}, {
-  id: 3,
-}, {
-  id: 4,
-}, {
-  id: 5,
-}, {
-  id: 6,
-}];
-
 const cardWithMarginWidth = 384;
 
 export default function Recents() {
-  const theme = useTheme();
+  const recents = useSelector(selectors.recents.getCompanies);
   const [scrollStatus, setScrollStatus] = useState(0);
   const [actualCard, setActualCard] = useState(0);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
 
   return (
     <Container>
@@ -116,8 +103,18 @@ export default function Recents() {
         }}
         ref={cardsRef}
       >
-        {cards.map(
-          (el) => <StockCard hoverble key={el.id} addon={<AddToFavButton companyId={el.id} />} />,
+        {recents.map(
+          (comp) => (
+            <StockCard
+              hoverble
+              key={comp.symbol}
+              companyName={comp.name}
+              changeValue={comp.changeValue}
+              symbol={comp.symbol}
+              logoSrc={comp.logoSrc}
+              addon={<AddToFavButton symbol={comp.symbol} />}
+            />
+          ),
         )}
 
       </Cards>

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { ProfileBar } from 'components';
+import { useSelector } from 'react-redux';
+import { selectors } from 'store';
 import { FavoriteStockCard } from './components';
 
 const Container = styled.div`
@@ -38,23 +40,27 @@ const Cards = styled.div`
 `;
 
 export default function Favorites() {
+  const favorites = useSelector(selectors.favorites.getCompanies);
+
   return (
     <Container>
       <ProfileBar />
       <Cards>
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-        <FavoriteStockCard />
-
+        {
+          favorites.map(
+            (comp) => (
+              <FavoriteStockCard
+                key={comp.symbol}
+                companyName={comp.name}
+                symbol={comp.symbol}
+                logoSrc={comp.logoSrc}
+                changeValue={comp.changeValue}
+              />
+            ),
+          )
+        }
       </Cards>
+
     </Container>
   );
 }

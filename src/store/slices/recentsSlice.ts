@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'store';
 
 export interface RecentsState {
   set: Set<string>;
@@ -20,5 +21,11 @@ export const recentsSlice = createSlice({
     },
   },
 });
+
+export const recentsSelectors = {
+  getCompanies(state : RootState) {
+    return Array.from(state.recents.set).map((symbol) => state.companies[symbol]);
+  },
+};
 
 export default recentsSlice.reducer;

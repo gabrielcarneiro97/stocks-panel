@@ -1,14 +1,17 @@
 import { FiStar } from 'react-icons/fi';
 import { Button, Tooltip } from 'components';
+import { useDispatch } from 'react-redux';
+import { actions } from 'store';
 
 type Props = {
-  companyId : number;
+  symbol : string;
 }
 
 export default function AddToFavButton(props : Props) {
-  const { companyId } = props;
+  const { symbol } = props;
+  const dispatch = useDispatch();
 
-  const handleClick = () => console.log(companyId);
+  const handleClick = () => dispatch(actions.favorites.add(symbol));
 
   return (
     <Tooltip content="Favoritar">

@@ -76,29 +76,28 @@ const PriceIcon = styled.div`
 `;
 
 type Props = {
-  variation? : string;
   hoverble?: boolean;
   shadow?: boolean;
   symbol?: string;
   companyName?: string;
   logoSrc?: string;
-  value?: string;
+  changeValue?: number;
   addon?: ReactNode;
 }
 
 const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
   const {
-    variation,
     shadow,
     hoverble,
     symbol,
     companyName,
     logoSrc,
-    value,
+    changeValue,
     addon,
   } = props;
 
   const theme = useTheme();
+  const variation = changeValue && changeValue <= 0 ? 'negative' : 'positive';
 
   return (
     <Container
@@ -121,7 +120,7 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
         <Company name={companyName} symbol={symbol} />
         <PriceContainer>
           <PriceValue variation={variation ?? 'positive'}>
-            { value || 'Value' }
+            { changeValue || 'Value' }
           </PriceValue>
           <PriceIcon>
             {variation === 'positive'
@@ -145,13 +144,12 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
 });
 
 StockCard.defaultProps = {
-  variation: 'positive',
   hoverble: false,
   shadow: true,
   symbol: undefined,
   companyName: undefined,
   logoSrc: undefined,
-  value: undefined,
+  changeValue: undefined,
   addon: undefined,
 };
 

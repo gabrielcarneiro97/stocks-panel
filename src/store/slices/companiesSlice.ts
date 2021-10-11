@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'store';
 
 interface Company {
   name: string;
   symbol: string;
   lastPrice: number;
-  change: number;
+  changeValue: number;
   changePercent: number;
+  logoSrc?: string;
   chartData?: object;
 }
 
@@ -28,5 +30,11 @@ export const companiesSlice = createSlice({
     },
   },
 });
+
+export const companiesSelectors = {
+  getCompany(symbol : string) {
+    return (state : RootState) => state.companies[symbol];
+  },
+};
 
 export default companiesSlice.reducer;

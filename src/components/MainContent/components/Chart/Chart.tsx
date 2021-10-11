@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 import {
   CartesianGrid, Tooltip as RechartsTooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
@@ -8,6 +7,8 @@ import {
   AddToFavButton, Company,
 } from 'components';
 
+import { useSelector } from 'react-redux';
+import { selectors } from 'store';
 import { ChartTooltip } from './components';
 
 const Container = styled.div`
@@ -58,69 +59,80 @@ const Variation = styled.div<{ variation : string }>`
 const data = [{ Data: '', Preço: null }, { Data: 'a', Preço: 12 }, { Data: 'b', Preço: 10 }, { Data: 'b', Preço: 11 }, { Data: 'b', Preço: 21 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: 'b', Preço: 14 }, { Data: '', Preço: null }];
 
 export default function Chart() {
-  const [variation] = useState('negative');
+  const company = useSelector(selectors.chart.active);
+
   const theme = useTheme();
+
+  const variation = company && company.changeValue <= 0 ? 'negative' : 'positive';
 
   return (
     <Container>
-      <Header>
-        <CompanyContainer>
-          <AddToFavButton companyId={0} />
+      {
+        company
+        && (
+          <>
+            <Header>
+              <CompanyContainer>
+                <AddToFavButton symbol={company.symbol} />
+                <Company />
+              </CompanyContainer>
+              <PriceContainer>
+                <Price>
+                  {variation === 'positive'
+                    ? (
+                      <FiTrendingUp
+                        color={theme.colors.success}
+                        style={{ marginRight: 3 }}
+                      />
+                    )
+                    : (
+                      <FiTrendingDown
+                        color={theme.colors.danger}
+                        style={{ marginRight: 3 }}
+                      />
+                    )}
+                  $200
+                </Price>
+                <Variation variation={variation}>
+                  $-0.09 (-0.03%)
+                </Variation>
+              </PriceContainer>
+            </Header>
 
-          <Company />
-        </CompanyContainer>
-        <PriceContainer>
-          <Price>
-            {variation === 'positive'
-              ? (
-                <FiTrendingUp
-                  color={theme.colors.success}
-                  style={{ marginRight: 3 }}
+            <ResponsiveContainer width="100%" height="80%">
+              <AreaChart
+                data={data}
+                margin={{
+                  top: 10, right: 30, left: 0, bottom: 0,
+                }}
+              >
+                <defs>
+                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor={theme.colors.primary} stopOpacity={0.25} />
+                    <stop offset="95%" stopColor={theme.colors.primary} stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="Data" />
+                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" />
+                <RechartsTooltip content={<ChartTooltip />} />
+                <Area
+                  type="monotone"
+                  dataKey="Preço"
+                  stroke={theme.colors.primary}
+                  fillOpacity={1}
+                  strokeWidth={2}
+                  fill="url(#colorUv)"
+                  dot
+                  activeDot
                 />
-              )
-              : (
-                <FiTrendingDown
-                  color={theme.colors.danger}
-                  style={{ marginRight: 3 }}
-                />
-              )}
-            $200
-          </Price>
-          <Variation variation={variation}>
-            $-0.09 (-0.03%)
-          </Variation>
-        </PriceContainer>
-      </Header>
+              </AreaChart>
+            </ResponsiveContainer>
+          </>
 
-      <ResponsiveContainer width="100%" height="80%">
-        <AreaChart
-          data={data}
-          margin={{
-            top: 10, right: 30, left: 0, bottom: 0,
-          }}
-        >
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor={theme.colors.primary} stopOpacity={0.25} />
-              <stop offset="95%" stopColor={theme.colors.primary} stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="Data" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <RechartsTooltip content={<ChartTooltip />} />
-          <Area
-            type="monotone"
-            dataKey="Preço"
-            stroke={theme.colors.primary}
-            fillOpacity={1}
-            strokeWidth={2}
-            fill="url(#colorUv)"
-            dot
-            activeDot
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+        )
+      }
+
     </Container>
   );
 }
