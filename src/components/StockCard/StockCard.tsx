@@ -3,6 +3,8 @@ import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
 import { forwardRef, ReactNode } from 'react';
 import { Company } from 'components';
+import { useDispatch } from 'react-redux';
+import { actions } from 'store';
 
 const Container = styled.div<{ shadow : boolean, hoverble: boolean }>`
   display: flex;
@@ -96,13 +98,21 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
     addon,
   } = props;
 
+  const dispatch = useDispatch();
   const theme = useTheme();
   const variation = changeValue && changeValue <= 0 ? 'negative' : 'positive';
+
+  const handleClick = () => {
+    if (symbol) {
+      dispatch(actions.chart.set(symbol));
+    }
+  };
 
   return (
     <Container
       hoverble={hoverble ?? false}
       shadow={shadow ?? true}
+      onClick={handleClick}
       ref={ref}
     >
       {
@@ -120,6 +130,7 @@ const StockCard = forwardRef<HTMLDivElement, Props>((props : Props, ref) => {
         <Company name={companyName} symbol={symbol} />
         <PriceContainer>
           <PriceValue variation={variation ?? 'positive'}>
+            $
             { changeValue || 'Value' }
           </PriceValue>
           <PriceIcon>

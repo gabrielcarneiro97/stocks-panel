@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 
 export interface FavoritesState {
-  set: Set<string>;
+  arr: string[]
 }
 
 const initialState : FavoritesState = {
-  set: new Set(),
+  arr: [],
 };
 
 export const favoritesSlice = createSlice({
@@ -14,17 +14,17 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
     add(state, action : PayloadAction<string>) {
-      state.set.add(action.payload);
+      if (!state.arr.includes(action.payload)) state.arr.push(action.payload);
     },
     remove(state, action : PayloadAction<string>) {
-      if (state.set.has(action.payload)) state.set.delete(action.payload);
+      state.arr = state.arr.filter((el) => el !== action.payload);
     },
   },
 });
 
 export const favoritesSelectors = {
   getCompanies(state : RootState) {
-    return Array.from(state.favorites.set).map((symbol) => state.companies[symbol]);
+    return state.favorites.arr.map((symbol) => state.companies[symbol]);
   },
 };
 

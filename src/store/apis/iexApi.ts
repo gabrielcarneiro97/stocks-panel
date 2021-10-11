@@ -11,38 +11,38 @@ export const iexApi = createApi({
     getCompanyBySymbol: builder.query<Company, string>({
       keepUnusedDataFor: 10,
       query: (symbol) => `stock/${symbol}/quote?token=${TOKEN}`,
-      transformResponse: ({ data } : { data : any }) => ({
+      transformResponse: (data : any) => ({
         name: data.companyName,
         symbol: data.symbol,
-        lastPrice: data.lastPrice,
+        latestPrice: data.latestPrice,
         changeValue: data.change,
         changePercent: data.changePercent,
       }),
-      onCacheEntryAdded: (arg, { getCacheEntry, dispatch, getState }) => {
-        const company = getCacheEntry().data;
+      onCacheEntryAdded: async (arg, {
+        dispatch, getState, cacheDataLoaded,
+      }) => {
+        const company = (await cacheDataLoaded).data;
         const state : RootState = getState() as any;
-        if (company) {
-          const stateCompany = state.companies[company.symbol];
-          dispatch(actions.companies.set({
-            ...stateCompany,
-            ...company,
-          }));
-        }
+
+        const stateCompany = state.companies[company.symbol];
+        dispatch(actions.companies.set({
+          ...stateCompany,
+          ...company,
+        }));
       },
     }),
     getLogoBySymbol: builder.query<string, string>({
       query: (symbol) => `stock/${symbol}/logo?token=${TOKEN}`,
-      transformResponse: ({ data } : { data : any }) => data.url,
-      onCacheEntryAdded: (symbol, { getCacheEntry, dispatch, getState }) => {
-        const logoSrc = getCacheEntry().data;
+      transformResponse: (data : any) => data.url,
+      onCacheEntryAdded: async (symbol, { dispatch, getState, cacheDataLoaded }) => {
+        const logoSrc = (await cacheDataLoaded).data;
         const state : RootState = getState() as any;
-        if (logoSrc) {
-          const stateCompany = state.companies[symbol];
-          dispatch(actions.companies.set({
-            logoSrc,
-            ...stateCompany,
-          }));
-        }
+        const stateCompany = state.companies[symbol.toUpperCase()];
+        dispatch(actions.companies.set({
+          ...stateCompany,
+          symbol: symbol.toUpperCase(),
+          logoSrc,
+        }));
       },
     }),
   }),

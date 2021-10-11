@@ -4,7 +4,7 @@ import { RootState } from 'store';
 export interface Company {
   name: string;
   symbol: string;
-  lastPrice: number;
+  latestPrice: number;
   changeValue: number;
   changePercent: number;
   logoSrc?: string;

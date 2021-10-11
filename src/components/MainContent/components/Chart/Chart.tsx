@@ -74,7 +74,7 @@ export default function Chart() {
             <Header>
               <CompanyContainer>
                 <AddToFavButton symbol={company.symbol} />
-                <Company />
+                <Company name={company.name} symbol={company.symbol} />
               </CompanyContainer>
               <PriceContainer>
                 <Price>
@@ -91,10 +91,16 @@ export default function Chart() {
                         style={{ marginRight: 3 }}
                       />
                     )}
-                  $200
+                  $
+                  {company.latestPrice}
                 </Price>
                 <Variation variation={variation}>
-                  $-0.09 (-0.03%)
+                  $
+                  {company.changeValue}
+                  {' '}
+                  (
+                  {company.changePercent}
+                  %)
                 </Variation>
               </PriceContainer>
             </Header>

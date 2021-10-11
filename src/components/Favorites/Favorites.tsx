@@ -6,7 +6,7 @@ import { FavoriteStockCard } from './components';
 
 const Container = styled.div`
   display: flex;
-  flex-grow: 3;
+  flex-grow: 4;
   flex-direction: column;
   background-color: ${(props) => props.theme.colors.white};
   margin: -8px;

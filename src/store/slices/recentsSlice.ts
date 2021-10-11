@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 
 export interface RecentsState {
-  set: Set<string>;
+  arr: string[]
 }
 
 const initialState : RecentsState = {
-  set: new Set(),
+  arr: [],
 };
 
 export const recentsSlice = createSlice({
@@ -14,17 +14,17 @@ export const recentsSlice = createSlice({
   initialState,
   reducers: {
     add(state, action : PayloadAction<string>) {
-      state.set.add(action.payload);
+      if (!state.arr.includes(action.payload)) state.arr.unshift(action.payload);
     },
     remove(state, action : PayloadAction<string>) {
-      if (state.set.has(action.payload)) state.set.delete(action.payload);
+      state.arr = state.arr.filter((el) => el !== action.payload);
     },
   },
 });
 
 export const recentsSelectors = {
   getCompanies(state : RootState) {
-    return Array.from(state.recents.set).map((symbol) => state.companies[symbol]);
+    return state.recents.arr.map((symbol) => state.companies[symbol]);
   },
 };
 

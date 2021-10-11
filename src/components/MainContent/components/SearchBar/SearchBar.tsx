@@ -1,18 +1,57 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { Input, Button } from 'components';
+import { iexApi } from 'store/apis/iexApi';
+import { useDispatch } from 'react-redux';
+import { actions } from 'store';
 
 export default function SearchBar() {
+  const [getCompany, companyResult] = iexApi.useLazyGetCompanyBySymbolQuery();
+  const [getLogo, logoResult] = iexApi.useLazyGetLogoBySymbolQuery();
+
+  const dispatch = useDispatch();
+
   const inputRef = useRef<HTMLInputElement>(null);
+  const [symbol, setSymbol] = useState('');
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    if (symbol) getCompany(symbol);
+  }, [symbol]);
+
+  useEffect(() => {
+    if (companyResult.isLoading || companyResult.isFetching) return;
+
+    if (companyResult.isSuccess) {
+      getLogo(symbol);
+      return;
+    }
+    if (companyResult.isError) {
+      // @TODO: levantar aviso de empresa não encontrada
+      setDisabled(false);
+      setSymbol('');
+    }
+  }, [companyResult]);
+
+  useEffect(() => {
+    if (logoResult.isLoading || logoResult.isFetching) return;
+    if (logoResult.isSuccess) {
+      dispatch(actions.chart.set(symbol));
+      dispatch(actions.recents.add(symbol));
+    }
+    setDisabled(false);
+    setSymbol('');
+  }, [logoResult]);
 
   const handleClick = () => {
-    // @TODO: tratar a busca aqui
+    setSymbol(inputRef.current?.value.toUpperCase() ?? '');
+    setDisabled(true);
   };
 
   return (
     <Input
       placeholder="Buscar Empresa"
-      addonAfter={<Button onClick={handleClick}><FiSearch size={18} /></Button>}
+      addonAfter={<Button disabled={disabled} onClick={handleClick}><FiSearch size={18} /></Button>}
       ref={inputRef}
     />
   );
