@@ -2,7 +2,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
 import { Button } from 'components';
 
-import picture from './assets/profile-pic.png';
+import picture from './assets/profile.svg';
 
 const Container = styled.div`
   display: flex;
@@ -23,8 +23,6 @@ const Container = styled.div`
 const ProfilePic = styled.img`
   height: 32px;
   width: 32px;
-  border-radius: 50px;
-  background-color: ${(props) => props.theme.colors.primary};
 `;
 
 const UserName = styled.div`

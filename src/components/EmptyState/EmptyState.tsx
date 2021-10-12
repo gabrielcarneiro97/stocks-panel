@@ -9,6 +9,7 @@ const Container = styled.div`
 const Image = styled.img<{ width?: string, height?: string }>`
   height: ${(props) => props.height ?? 'auto'};
   width: ${(props) => props.width ?? 'auto'};
+  margin-bottom: 32px;
 `;
 
 type Props = {

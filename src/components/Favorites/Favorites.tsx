@@ -5,12 +5,12 @@ import { selectors } from 'store';
 import { FiStar } from 'react-icons/fi';
 import { FavoriteStockCard } from './components';
 
-import emptyStateImg from './assets/empty-state.png';
+import emptyStateImg from './assets/empty-state.svg';
 
 const Container = styled.div`
   display: flex;
-  flex-grow: 4;
   flex-direction: column;
+  width: 25vw;
   background-color: ${(props) => props.theme.colors.white};
   margin: -8px;
   margin-left: 12px;
@@ -23,11 +23,12 @@ const Title = styled.div`
   margin-top: 16px;
 `;
 
-const Cards = styled.div`
+const Cards = styled.div<{ isEmpty: boolean }>`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
-  height: 85vh;
+  height: ${(props) => (props.isEmpty ? '65vh' : '85vh')};
+  justify-content: ${(props) => (props.isEmpty ? 'center' : 'normal')};;
 
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -61,7 +62,7 @@ export default function Favorites() {
         {' '}
         Favoritos
       </Title>
-      <Cards>
+      <Cards isEmpty={favorites.length === 0}>
         {
           favorites.map(
             (comp) => (

@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import { iexApi } from 'store/apis/iexApi';
 import { ChartTooltip } from './components';
 
-import emptyStateImg from './assets/empty-state.png';
+import emptyStateImg from './assets/empty-state.svg';
 
 const Container = styled.div`
   display: flex;
