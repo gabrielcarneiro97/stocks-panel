@@ -17,6 +17,8 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 18px;
   font-weight: bold;
   margin-left: 16px;

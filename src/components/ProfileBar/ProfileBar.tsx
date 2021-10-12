@@ -23,6 +23,7 @@ const Container = styled.div`
 const ProfilePic = styled.img`
   height: 32px;
   width: 32px;
+  margin-right: 8px;
 `;
 
 const UserName = styled.div`
