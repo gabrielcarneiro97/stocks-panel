@@ -19,3 +19,5 @@ $ yarn start
 $ npm install
 $ npm start
 ```
+
+Após executar esses comandos a aplicação estará disponível no endereço [http://localhost:3000](http://localhost:3000).
