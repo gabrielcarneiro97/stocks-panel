@@ -4,6 +4,7 @@ import { Input, Button } from 'components';
 import { iexApi } from 'store/apis/iexApi';
 import { useDispatch } from 'react-redux';
 import { actions } from 'store';
+import { toast } from 'react-toastify';
 
 export default function SearchBar() {
   const [getCompany, companyResult] = iexApi.useLazyGetCompanyBySymbolQuery();
@@ -27,7 +28,7 @@ export default function SearchBar() {
       return;
     }
     if (companyResult.isError) {
-      // @TODO: levantar aviso de empresa não encontrada
+      toast.error('Empresa não encontrada!');
       setDisabled(false);
       setSymbol('');
     }

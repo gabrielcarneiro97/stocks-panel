@@ -9,6 +9,8 @@ import App from 'App';
 import store from 'store';
 import reportWebVitals from 'reportWebVitals';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Open Sans', sans-serif;

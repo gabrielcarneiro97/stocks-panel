@@ -3,6 +3,7 @@ import styled, { useTheme } from 'styled-components';
 import { Button, StockCard } from 'components';
 import { useDispatch } from 'react-redux';
 import { actions } from 'store';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
   display: flex;
@@ -28,7 +29,10 @@ export default function FavoriteStockCard(props : Props) {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const handleDelete = () => dispatch(actions.favorites.remove(symbol));
+  const handleDelete = () => {
+    dispatch(actions.favorites.remove(symbol));
+    toast.warn(`Empresa "${symbol}" removida dos favoritos!`);
+  };
 
   return (
     <Container>
