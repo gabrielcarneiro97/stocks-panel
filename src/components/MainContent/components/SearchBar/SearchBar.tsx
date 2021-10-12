@@ -17,7 +17,10 @@ export default function SearchBar() {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (symbol) getCompany(symbol);
+    if (symbol) {
+      setDisabled(true);
+      getCompany(symbol);
+    }
   }, [symbol]);
 
   useEffect(() => {
@@ -47,7 +50,6 @@ export default function SearchBar() {
 
   const handleClick = () => {
     setSymbol(inputRef.current?.value.toUpperCase() ?? '');
-    setDisabled(true);
   };
 
   return (
