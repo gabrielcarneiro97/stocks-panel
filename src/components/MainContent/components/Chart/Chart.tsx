@@ -82,14 +82,12 @@ export default function Chart() {
   const [chartData, setChartData] = useState<ChartData[] | undefined>(undefined);
 
   useEffect(() => {
-    console.log('here');
     if (company) {
       getChartData(company.symbol);
     }
   }, [company?.symbol]);
 
   useEffect(() => {
-    console.log('chartDataResult', chartDataResult);
     if (chartDataResult.isLoading || chartDataResult.isFetching) return;
 
     if (chartDataResult.isSuccess) {

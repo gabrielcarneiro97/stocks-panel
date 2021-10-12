@@ -62,7 +62,7 @@ export default function Favorites() {
       <Title>
         <FiStar size={18} color={theme.colors.primary} style={{ marginRight: 3 }} />
         {' '}
-        Favoritos
+        Empresas Favoritas
       </Title>
       <Cards isEmpty={favorites.length === 0}>
         {

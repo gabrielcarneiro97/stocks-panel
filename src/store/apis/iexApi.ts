@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { actions, RootState } from 'store';
 import { ChartData, Company } from '../slices/companiesSlice';
 
-const TOKEN = 'Tpk_69c194138e45487194bbb5d37ecb1896';
+const TOKEN = 'pk_033317161d4e4f25ac1120d1e7b87ed7';
 
 const quoteToCompany : (quote : any) => Company = (quote) => ({
   name: quote.companyName,
@@ -14,7 +14,7 @@ const quoteToCompany : (quote : any) => Company = (quote) => ({
 
 export const iexApi = createApi({
   reducerPath: 'iexApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://sandbox.iexapis.com/stable/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://cloud.iexapis.com/stable/' }),
   endpoints: (builder) => ({
     getCompanyBySymbol: builder.query<Company, string>({
       keepUnusedDataFor: 10,
@@ -48,7 +48,7 @@ export const iexApi = createApi({
       },
     }),
     getChartDataBySymbol: builder.query<ChartData[], string>({
-      query: (symbol) => `/stock/${symbol}/chart/dynamic?token=${TOKEN}&chartSimplify=true&chartLast=20`,
+      query: (symbol) => `/stock/${symbol}/chart/dynamic?token=${TOKEN}&chartLast=20`,
       keepUnusedDataFor: 0,
       transformResponse: (response : any) => response.data.map(
         (r : any) => ({ label: r.label, value: r.close }),
