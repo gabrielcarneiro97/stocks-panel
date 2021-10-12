@@ -1,5 +1,7 @@
 import { FiGrid } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
+import useCompaniesUpdate from 'hooks/useCompaniesUpdate';
+
 import { Chart, Recents, SearchBar } from './components';
 
 const Container = styled.div`
@@ -27,6 +29,7 @@ const SearchContainer = styled.div`
 `;
 
 export default function MainContent() {
+  useCompaniesUpdate();
   const theme = useTheme();
 
   return (

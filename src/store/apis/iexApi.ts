@@ -4,6 +4,14 @@ import { ChartData, Company } from '../slices/companiesSlice';
 
 const TOKEN = 'Tpk_69c194138e45487194bbb5d37ecb1896';
 
+const quoteToCompany : (quote : any) => Company = (quote) => ({
+  name: quote.companyName,
+  symbol: quote.symbol,
+  latestPrice: quote.latestPrice,
+  changeValue: quote.change,
+  changePercent: quote.changePercent,
+});
+
 export const iexApi = createApi({
   reducerPath: 'iexApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://sandbox.iexapis.com/stable/' }),
@@ -11,13 +19,7 @@ export const iexApi = createApi({
     getCompanyBySymbol: builder.query<Company, string>({
       keepUnusedDataFor: 10,
       query: (symbol) => `stock/${symbol}/quote?token=${TOKEN}`,
-      transformResponse: (data : any) => ({
-        name: data.companyName,
-        symbol: data.symbol,
-        latestPrice: data.latestPrice,
-        changeValue: data.change,
-        changePercent: data.changePercent,
-      }),
+      transformResponse: quoteToCompany,
       onCacheEntryAdded: async (arg, {
         dispatch, getState, cacheDataLoaded,
       }) => {
@@ -61,6 +63,13 @@ export const iexApi = createApi({
           chartData,
         }));
       },
+    }),
+    getCompaniesBySymbols: builder.query<Company[], string[]>({
+      query: (symbols) => `/stock/market/batch?token=${TOKEN}&symbols=${symbols.join(',')}&types=quote`,
+      keepUnusedDataFor: 0,
+      transformResponse: (response : any) => Object.keys(response).map(
+        (symbol : string) => quoteToCompany(response[symbol].quote),
+      ),
     }),
   }),
 });
