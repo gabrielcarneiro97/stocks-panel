@@ -3,16 +3,18 @@ import {
   CartesianGrid, Tooltip as RechartsTooltip, XAxis, YAxis, Area, AreaChart, ResponsiveContainer,
 } from 'recharts';
 import styled, { useTheme } from 'styled-components';
-import {
-  AddToFavButton, Company,
-} from 'components';
-
 import { useSelector } from 'react-redux';
+
+import {
+  AddToFavButton, Company, EmptyState,
+} from 'components';
 import { selectors } from 'store';
 import { ChartData } from 'store/slices/companiesSlice';
 import { useEffect, useState } from 'react';
 import { iexApi } from 'store/apis/iexApi';
 import { ChartTooltip } from './components';
+
+import emptyStateImg from './assets/empty-state.png';
 
 const Container = styled.div`
   display: flex;
@@ -168,6 +170,16 @@ export default function Chart() {
             </ResponsiveContainer>
           </>
 
+        )
+      }
+      {
+        !company
+        && (
+        <EmptyState
+          img={emptyStateImg}
+          imgHeight="30vh"
+          text="Nenhuma empresa selecionada! Use a barra de pesquisa para começar."
+        />
         )
       }
 

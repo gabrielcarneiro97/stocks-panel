@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 
 export interface RecentsState {
-  arr: string[]
+  recentsMaxSize: number;
+  arr: string[];
 }
 
 const initialState : RecentsState = {
+  recentsMaxSize: 20,
   arr: [],
 };
 
@@ -15,6 +17,7 @@ export const recentsSlice = createSlice({
   reducers: {
     add(state, action : PayloadAction<string>) {
       if (!state.arr.includes(action.payload)) state.arr.unshift(action.payload);
+      if (state.arr.length > state.recentsMaxSize) state.arr.pop();
     },
     remove(state, action : PayloadAction<string>) {
       state.arr = state.arr.filter((el) => el !== action.payload);

@@ -8,3 +8,4 @@ export { default as Tooltip } from './Tooltip/Tooltip';
 export { default as AddToFavButton } from './AddToFavButton/AddToFavButton';
 export { default as Favorites } from './Favorites/Favorites';
 export { default as ProfileBar } from './ProfileBar/ProfileBar';
+export { default as EmptyState } from './EmptyState/EmptyState';
