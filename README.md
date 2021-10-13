@@ -4,7 +4,7 @@
 
 Painel para consulta de valores de ações de empresas americanas.
 
-## Usando
+## Como usar?
 
 Para executar a aplicação é necessário ter instalado na maquina o Node.js, *yarn* é recomendável. Depois disso basta rodar os seguintes comandos na pasta do projeto:
 
@@ -21,3 +21,18 @@ $ npm start
 ```
 
 Após executar esses comandos a aplicação estará disponível no endereço [http://localhost:3000](http://localhost:3000).
+
+## Funcionalidades
+
+- Consulta dos preços e variações das ações do mercado norte-americano.
+- Atualizações em tempo real.
+- Barra de empresas favoritas.
+
+## Tecnologias e Bibliotecas
+
+- React 17.02
+- Redux (redux-toolkit)
+- RTK Query
+- styled-components
+- Recharts
+- React-toastify
