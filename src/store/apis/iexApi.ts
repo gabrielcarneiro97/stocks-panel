@@ -48,9 +48,9 @@ export const iexApi = createApi({
       },
     }),
     getChartDataBySymbol: builder.query<ChartData[], string>({
-      query: (symbol) => `/stock/${symbol}/chart/dynamic?token=${TOKEN}&chartLast=20`,
+      query: (symbol) => `/stock/${symbol}/chart/1d?token=${TOKEN}&chartLast=20`,
       keepUnusedDataFor: 0,
-      transformResponse: (response : any) => response.data.map(
+      transformResponse: (response : any) => response.map(
         (r : any) => ({ label: r.label, value: r.close }),
       ),
       onCacheEntryAdded: async (symbol, { dispatch, getState, cacheDataLoaded }) => {
